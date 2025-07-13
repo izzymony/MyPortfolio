@@ -1,8 +1,5 @@
 "use client";
 import React, {useState} from 'react';
-
-import { motion } from 'framer-motion';
-
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect } from 'react';
@@ -106,13 +103,7 @@ export default function Home() {
             </div>
         </div>
       );
-  } else{
-    return(
-      <div className='bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen text-white'>
-      Error
-            </div>
-    )
-  }
+  } 
 
 
   return (
@@ -219,12 +210,12 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <p className="text-gray-300 text-lg mb-6">
-                  I'm a passionate frontend developer with 5+ years of experience creating 
+                  I&apos;m a passionate frontend developer with 5+ years of experience creating 
                   modern web applications. I love turning complex problems into simple, 
                   beautiful designs.
                 </p>
                 <p className="text-gray-300 text-lg mb-6">
-                  When I'm not coding, you can find me exploring new technologies, 
+                  When I&apos;m not coding, you can find me exploring new technologies, 
                   contributing to open source projects, or sharing knowledge with the 
                   developer community.
                 </p>
@@ -336,6 +327,7 @@ export default function Home() {
                         </svg>
                       </a>
                     </div>
+                    <div className='hidden'>{project.id}</div>
     </div>
   </div>
 ))}
@@ -349,23 +341,23 @@ export default function Home() {
             <h2 className="text-4xl font-bold text-white mb-12 text-center">Get In Touch</h2>
             <div className="grid md:grid-cols-2 gap-12">
               <div>
-                <h3 className="text-2xl font-bold text-white mb-6">Let's Work Together</h3>
+                <h3 className="text-2xl font-bold text-white mb-6">Let&apos;s Work Together</h3>
                 <p className="text-gray-300 mb-6">
-                  I'm always interested in new opportunities and exciting projects. 
-                  Whether you have a question or just want to say hi, I'll get back to you!
+                  I&apos;m always interested in new opportunities and exciting projects. 
+                  Whether you have a question or just want to say hi, I&apos;ll get back to you!
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-center">
                     <svg className="w-5 h-5 text-purple-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                    <span className="text-gray-300">your.email@example.com</span>
+                    <span className="text-gray-300">ojehonmonisrael008@gmail.com</span>
                   </div>
                   <div className="flex items-center">
                     <svg className="w-5 h-5 text-purple-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
-                    <span className="text-gray-300">+234 123 456 7890</span>
+                    <span className="text-gray-300">+234 906 579 8272</span>
                   </div>
                   <div className="flex items-center">
                     <svg className="w-5 h-5 text-purple-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -437,7 +429,7 @@ export default function Home() {
         <footer className="py-8 px-4 border-t border-white/10">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-gray-400">
-              © 2025 Your Name. Built with Next.js, TypeScript, and Tailwind CSS.
+              © 2025 Ojehonmon Israel. Built with Next.js, TypeScript, and Tailwind CSS.
             </p>
           </div>
         </footer>
