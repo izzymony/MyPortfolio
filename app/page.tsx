@@ -1,12 +1,10 @@
 "use client";
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-
 import {useForm, ValidationError} from '@formspree/react'
-
 
 interface Project {
   id: number
@@ -91,8 +89,18 @@ export default function Home() {
     setIsMenuOpen(false)
   }
 
+  const router = useRouter()
+
   const [state, handleSubmit] = useForm('mzzvpgjq')
     if (state.succeeded) {
+      useEffect(() => {
+        const timer = setTimeout(() => {
+          router.back()
+        }, 2000);
+
+        return () => clearTimeout(timer)
+      },[router])
+      
       return(
         <div className=' h-screen flex gap-3 flex-col items-center justify-center p-3'>
             <div className='bg-white  p-6 text-center  justify-center  justify-center align-center rounded-lg shadow-lg'>
@@ -374,7 +382,7 @@ export default function Home() {
                 <div>
                   <input
                     type="text"
-                    id='name'
+                    
                     required
                     placeholder="Your Name"
                     className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-purple-400"
@@ -387,7 +395,7 @@ export default function Home() {
                 <div>
                   <input
                     type="email"
-                    id='email'
+                    
                     name='email'
                     required
                     placeholder="Your Email"
@@ -402,7 +410,7 @@ export default function Home() {
                   <textarea
                     rows={4}
                     name="message" // <-- Add this
-                    id='message'
+                    
                     placeholder="Your Message"
                     required
                     className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-purple-400"
