@@ -11,7 +11,7 @@ export default function(){
               const[liveUrl,setLiveUrl]= useState("")
                const [githubUrl, setGithubUrl] = useState("");
               const [isLoading, setIsLoading]=useState(false)
-              const [uploading, setUploading] =useState(false)
+              
 
               const handleUpload = async () =>{
                 if (!title || !image) return alert("Title and image are required");
@@ -52,7 +52,7 @@ try{
   }
   setIsLoading(false)
 } catch(err){
-  console.error("Error uploading to the database")
+  console.error("Error uploading to the database:", err)
 } finally{
   setIsLoading(false)
 }

@@ -5,20 +5,9 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {useForm, ValidationError} from '@formspree/react'
-import { Github, Globe } from 'lucide-react';
 import { supabase } from '@/lib/supabaseClient';
-import { error } from 'console';
 
 
-interface Project {
-  id: number
-  title: string
-  description: string
-  technologies: string[]
-  image?: string
-  github?: string
-  demo?: string
-}
 
 interface Projects{
   id: string;
@@ -40,7 +29,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState<string>('home');
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const[project, setProject] = useState<Projects[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
 
 
   useEffect(()=>{
