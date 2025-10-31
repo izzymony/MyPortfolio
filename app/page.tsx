@@ -99,26 +99,35 @@ export default function Home() {
   const router = useRouter()
 
   const [state, handleSubmit] = useForm('mzzvpgjq')
-    if (state.succeeded) {
-      useEffect(() => {
-        const timer = setTimeout(() => {
-          router.back()
-        }, 2000);
+    // keep hooks at the top-level
+useEffect(() => {
+  if (state.succeeded) {
+    const timer = setTimeout(() => {
+      router.back();
+    }, 2000);
 
-        return () => clearTimeout(timer)
-      },[router])
-      
-      return(
-        <div className=' h-screen flex gap-3 flex-col items-center justify-center p-3'>
-            <div className='bg-white  p-6 text-center  justify-center  justify-center align-center rounded-lg shadow-lg'>
-           
-              <Image className='mx-auto' src={'/icons8-check-50 (1).png'} alt=''width={40} height={40} />
-                 <p className='text-black font-bold text-[26px]  '>Thank you for Reaching Out</p>
-                 <p className='text-black font-semibold'>We Will Get Back Soon</p>
-            </div>
-        </div>
-      );
-  } 
+    return () => clearTimeout(timer);
+  }
+}, [state.succeeded, router]);
+
+if (state.succeeded) {
+  return (
+    <div className="h-screen flex gap-3 flex-col items-center justify-center p-3">
+      <div className="bg-white p-6 text-center rounded-lg shadow-lg">
+        <Image
+          className="mx-auto"
+          src={"/icons8-check-50 (1).png"}
+          alt=""
+          width={40}
+          height={40}
+        />
+        <p className="text-black font-bold text-[26px]">Thank you for Reaching Out</p>
+        <p className="text-black font-semibold">We Will Get Back Soon</p>
+      </div>
+    </div>
+  );
+}
+
 
 
   return (

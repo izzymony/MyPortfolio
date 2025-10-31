@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { supabase } from "@/lib/supabaseClient"
 
 
-export default function(){
+export default function Admin(){
               const [title, setTitle] = useState("")
               const [description, setDescription] = useState("")
               const [image, setImage] = useState<File | null>(null)
@@ -17,7 +17,7 @@ export default function(){
                 if (!title || !image) return alert("Title and image are required");
     setIsLoading(true);
      const filePath = `projects/${Date.now()}-${image.name}`;
-     const {data: imageData, error:imageError} = await supabase.storage.from("project_image").upload(filePath,image);
+     const { error:imageError} = await supabase.storage.from("project_image").upload(filePath,image);
 
      if(imageError){
         console.error(imageError) 
