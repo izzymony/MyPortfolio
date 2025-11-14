@@ -65,13 +65,13 @@ export default function Home() {
 
   useEffect(()=>{
     const fetchProjects = async() =>{
-     
+
       try{
-        const {data, error} = await supabase.from("projects")
+        const {data} = await supabase.from("projects")
         .select("*")
         .order("created_at", {ascending:false})
 
-       if (!error) setProject(data || []);
+       if (data) setProject(data);
       setLoading(false);
        
       } catch(err){
@@ -133,34 +133,36 @@ export default function Home() {
   const router = useRouter()
 
   const [state, handleSubmit] = useForm('mzzvpgjq')
-    // keep hooks at the top-level
-useEffect(() => {
+
+  // keep hooks at the top-level - BEFORE any conditional returns
+  useEffect(() => {
+    if (state.succeeded) {
+      const timer = setTimeout(() => {
+        router.back();
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [state.succeeded, router]);
+
+  // Early return AFTER all hooks
   if (state.succeeded) {
-    const timer = setTimeout(() => {
-      router.back();
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }
-}, [state.succeeded, router]);
-
-if (state.succeeded) {
-  return (
-    <div className="h-screen flex gap-3 flex-col items-center justify-center p-3">
-      <div className="bg-white p-6 text-center rounded-lg shadow-lg">
-        <Image
-          className="mx-auto"
-          src={"/icons8-check-50 (1).png"}
-          alt=""
-          width={40}
-          height={40}
-        />
-        <p className="text-black font-bold text-[26px]">Thank you for Reaching Out</p>
-        <p className="text-black font-semibold">We Will Get Back Soon</p>
+    return (
+      <div className="h-screen flex gap-3 flex-col items-center justify-center p-3">
+        <div className="bg-white p-6 text-center rounded-lg shadow-lg">
+          <Image
+            className="mx-auto"
+            src={"/icons8-check-50 (1).png"}
+            alt=""
+            width={40}
+            height={40}
+          />
+          <p className="text-black font-bold text-[26px]">Thank you for Reaching Out</p>
+          <p className="text-black font-semibold">We Will Get Back Soon</p>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
 
 
