@@ -17,7 +17,7 @@ interface ProjectCardProps {
 const FramerImage = motion(Image);
 
 export const ProjectCard = ({
-id,
+
 title,
 description,
 tags,
