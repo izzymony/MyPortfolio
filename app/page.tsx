@@ -61,6 +61,7 @@ export default function Home() {
   const[project, setProject] = useState<Projects[]>([]);
   const [, setLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
+  
 
 
   useEffect(()=>{
@@ -139,7 +140,7 @@ export default function Home() {
     if (state.succeeded) {
       const timer = setTimeout(() => {
         router.back();
-      }, 2000);
+      }, 200);
 
       return () => clearTimeout(timer);
     }
@@ -148,17 +149,143 @@ export default function Home() {
   // Early return AFTER all hooks
   if (state.succeeded) {
     return (
-      <div className="h-screen flex gap-3 flex-col items-center justify-center p-3">
-        <div className="bg-white p-6 text-center rounded-lg shadow-lg">
-          <Image
-            className="mx-auto"
-            src={"/icons8-check-50 (1).png"}
-            alt=""
-            width={40}
-            height={40}
+      <div className="min-h-screen relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="fixed inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-white via-[#F0F8FF]/30 to-white"></div>
+          <motion.div
+            className="absolute top-0 left-0 w-96 h-96 bg-[#2F73F2]/10 rounded-full blur-3xl"
+            animate={{
+              x: [0, 100, 0],
+              y: [0, 50, 0],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear"
+            }}
           />
-          <p className="text-black font-bold text-[26px]">Thank you for Reaching Out</p>
-          <p className="text-black font-semibold">We Will Get Back Soon</p>
+          <motion.div
+            className="absolute bottom-0 right-0 w-96 h-96 bg-[#f9c78f]/20 rounded-full blur-3xl"
+            animate={{
+              x: [0, -100, 0],
+              y: [0, -50, 0],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+        </div>
+
+        <div className="h-screen flex items-center justify-center p-4 relative z-10">
+          <motion.div
+            className="bg-white/95 backdrop-blur-md p-8 md:p-12 text-center rounded-2xl shadow-2xl border border-gray-200 max-w-md w-full"
+            initial={{ opacity: 0, scale: 0.8, y: 50 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
+          >
+            {/* Success Icon with Animation */}
+            <motion.div
+              className="mb-6 flex justify-center"
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ delay: 0.2, duration: 0.6, type: "spring", stiffness: 150 }}
+            >
+              <motion.div
+                className="w-20 h-20 rounded-full bg-gradient-to-br from-[#2F73F2] to-[#f9c78f] flex items-center justify-center shadow-lg"
+                animate={{
+                  boxShadow: [
+                    "0 0 20px rgba(47, 115, 242, 0.4)",
+                    "0 0 40px rgba(249, 199, 143, 0.6)",
+                    "0 0 20px rgba(47, 115, 242, 0.4)",
+                  ],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <Image
+                  className="filter brightness-0 invert"
+                  src={"/icons8-check-50 (1).png"}
+                  alt="Success"
+                  width={50}
+                  height={50}
+                />
+              </motion.div>
+            </motion.div>
+
+            {/* Success Message */}
+            <motion.h2
+              className="text-3xl md:text-4xl font-bold text-gray-900 mb-3"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2F73F2] to-[#f9c78f]">
+                Thank You!
+              </span>
+            </motion.h2>
+
+            <motion.p
+              className="text-gray-700 text-lg font-semibold mb-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              Your message has been sent successfully
+            </motion.p>
+
+            <motion.p
+              className="text-gray-600 mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
+              We will get back to you soon
+            </motion.p>
+
+            {/* Progress Bar */}
+            <motion.div
+              className="w-full bg-gray-200 rounded-full h-1.5 mb-6 overflow-hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <motion.div
+                className="h-full bg-gradient-to-r from-[#2F73F2] to-[#f9c78f]"
+                initial={{ width: "0%" }}
+                animate={{ width: "100%" }}
+                transition={{ duration: 2, ease: "linear" }}
+              />
+            </motion.div>
+
+            {/* Manual Return Button */}
+            <motion.button
+              onClick={() => { router.back() }}
+              className="bg-gradient-to-r from-[#2F73F2] to-[#f9c78f] hover:opacity-90 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg w-full"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.5 }}
+              whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(47, 115, 242, 0.4)" }}
+              whileTap={{ scale: 0.98 }}
+              title="Return to portfolio"
+            >
+              Return to Portfolio
+            </motion.button>
+
+            <motion.p
+              className="text-sm text-gray-500 mt-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+            >
+              Redirecting automatically in 2 seconds...
+            </motion.p>
+          </motion.div>
         </div>
       </div>
     );
@@ -257,12 +384,13 @@ export default function Home() {
               </motion.div>
 
               {/* Mobile Menu Button */}
-              <button
+              <button title='button'
                 className="md:hidden text-gray-700"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  
                 </svg>
               </button>
             </div>
