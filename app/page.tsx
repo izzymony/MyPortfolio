@@ -479,7 +479,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               I craft beautiful, responsive web applications using modern technologies.
-              Passionate about creating exceptional user experience.
+              Passionate about creating exceptional user experiences.
             </motion.p>
 
             <motion.div
