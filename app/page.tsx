@@ -78,20 +78,28 @@ export default function Home() {
 
   const experiences = [
     {
-      role: "Junior Frontend Engineer",
-      company: "Self-employed",
-      period: "2024 — Present",
+      role: "Frontend Developer",
+      company: "Aquila Cyber",
+      period: "Nov 2025 — Present",
       description:
-        "I design and build modern web applications using React, Next.js, and Tailwind CSS. I focus on creating clean, responsive user interfaces with smooth animations and seamless API integrations.",
-      skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
+        "Currently responsible for building clean user interfaces, working closely with designers, backend engineers, and product managers. Crafted responsive web designs that boosted user engagement by 30%, optimized website performance reducing load times by 50%, and integrated APIs seamlessly to expand functionality and user experience.",
+      skills: ["Next.js", "TypeScript", "Tailwind CSS", "REST APIs", "Agile"],
     },
     {
-      role: "Frontend Developer",
-      company: "Freelance",
-      period: "2023 — 2024",
+      role: "Frontend Developer (Intern) & QA Tester",
+      company: "Myinstashop",
+      period: "Apr 2025 — Present",
       description:
-        "Built responsive, mobile-first websites for clients. Worked closely with designers to implement pixel-perfect UI/UX. Integrated REST APIs and third-party services.",
-      skills: ["JavaScript", "HTML/CSS", "React", "Firebase", "Git"],
+        "Assisted in building and improving user-facing features while ensuring product quality through systematic testing. Developed responsive UI components using Next.js, Tailwind, and TypeScript. Translated Figma designs into clean, reusable code, identified and tracked bugs, and performed manual/functional testing before releases.",
+      skills: ["Next.js", "Tailwind CSS", "TypeScript", "QA Testing", "Figma"],
+    },
+    {
+      role: "Frontend Developer (Intern)",
+      company: "Tverza",
+      period: "Jan 2025 — Apr 2025",
+      description:
+        "Assisted in building and improving user interfaces with Next.js, Tailwind CSS, and TypeScript. Collaborated with designers to create visually appealing UI/UX solutions, integrated APIs to enhance functionality, and participated in code reviews fostering a culture of quality and learning.",
+      skills: ["Next.js", "JavaScript", "TypeScript", "Tailwind CSS", "Git"],
     },
   ];
 
@@ -606,9 +614,9 @@ export default function Home() {
                     </h3>
                   </div>
                   <p className="text-[#888] text-sm leading-relaxed">
-                    1+ years of professional experience building modern web applications
-                    with React, Next.js, and TypeScript. Focused on creating
-                    intuitive, performant user interfaces.
+                    Professional experience at Aquila Cyber, Myinstashop, and Tverza —
+                    building responsive UIs with React, Next.js, and TypeScript.
+                    Skilled in translating designs to code, API integration, and QA testing.
                   </p>
                 </div>
               </motion.div>
