@@ -285,7 +285,7 @@ export default function Home() {
                 transition={{ duration: 0.5 }}
               >
                 <span className="text-[#888]">{"{"}</span>
-                Dev
+                Ojehonmon Israel.Dev
                 <span className="text-[#888]">{"}"}</span>
               </motion.div>
 
