@@ -98,7 +98,7 @@ export default function Home() {
       company: "Tverza",
       period: "Jan 2025 — Apr 2025",
       description:
-        "Assisted in building and improving user interfaces with Next.js, Tailwind CSS, and TypeScript. Collaborated with designers to create visually appealing UI/UX solutions, integrated APIs to enhance functionality, and participated in code reviews fostering a culture of quality and learning.",
+        "Tverza is the single point of entry and exit into the World Business Activities, Revolutionizing the way real-world businesses operate in the digital realm redefining transactions within supply chains.Assisted in building and improving user interfaces with Next.js, Tailwind CSS, and TypeScript. Collaborated with designers to create visually appealing UI/UX solutions, integrated APIs to enhance functionality, and participated in code reviews fostering a culture of quality and learning.",
       skills: ["Next.js", "JavaScript", "TypeScript", "Tailwind CSS", "Git"],
     },
   ];
