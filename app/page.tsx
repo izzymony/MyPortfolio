@@ -68,7 +68,9 @@ export default function Home() {
     "TypeScript",
     "Tailwind CSS",
     "Supabase",
-    "Firebase",
+    "DRIZZLE-ORM",
+    "SQL",
+    "AI/LLM Integrations and vector search",
     "Git",
     "GitHub",
     "REST APIs",
@@ -98,7 +100,7 @@ export default function Home() {
       company: "Tverza",
       period: "Jan 2025 — Apr 2025",
       description:
-        "Assisted in building and improving user interfaces with Next.js, Tailwind CSS, and TypeScript. Collaborated with designers to create visually appealing UI/UX solutions, integrated APIs to enhance functionality, and participated in code reviews fostering a culture of quality and learning.",
+        "Tverza is the single point of entry and exit into the World Business Activities, Revolutionizing the way real-world businesses operate in the digital realm redefining transactions within supply chains.Assisted in building and improving user interfaces with Next.js, Tailwind CSS, and TypeScript. Collaborated with designers to create visually appealing UI/UX solutions, integrated APIs to enhance functionality, and participated in code reviews fostering a culture of quality and learning.",
       skills: ["Next.js", "JavaScript", "TypeScript", "Tailwind CSS", "Git"],
     },
   ];
@@ -275,7 +277,7 @@ export default function Home() {
         />
 
         {/* =============== NAVBAR =============== */}
-        <nav className="fixed top-0 w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-[#1a1a1a]">
+        <nav className="fixed top-0 w-full z-50 bg-[#0a0a0a]/60 backdrop-blur-2xl border-b border-white/5 transition-all duration-300">
           <div className="max-w-6xl mx-auto px-6">
             <div className="flex justify-between items-center h-16">
               <motion.div
@@ -414,19 +416,19 @@ export default function Home() {
 
             {/* Hero Heading */}
             <motion.h1
-              className="text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-[1.1] tracking-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               Crafting Digital
               <br />
-              <span className="gradient-text">Magic</span>
+              <span className="gradient-text glow-text relative inline-block">Magic</span>
             </motion.h1>
 
             {/* Subtitle */}
             <motion.p
-              className="text-[#888] text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed"
+              className="text-[#888] text-lg sm:text-xl md:text-2xl mb-10 max-w-2xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -438,24 +440,24 @@ export default function Home() {
 
             {/* CTA Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+              className="flex flex-col sm:flex-row gap-5 justify-center mb-16"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
               <motion.button
                 onClick={() => scrollToSection("projects")}
-                className="bg-white text-black px-8 py-3 rounded-lg font-semibold text-sm hover:bg-white/90 transition-all shadow-[0_0_30px_rgba(255,255,255,0.1)]"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+                className="bg-white text-black px-8 py-4 rounded-xl font-bold text-sm tracking-wide hover:bg-white/90 transition-all shadow-[0_0_40px_rgba(255,255,255,0.15)] hover:shadow-[0_0_60px_rgba(255,255,255,0.25)]"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Explore My Work
               </motion.button>
               <motion.button
                 onClick={() => scrollToSection("contact")}
-                className="border border-[#333] text-white px-8 py-3 rounded-lg font-semibold text-sm hover:bg-white/5 transition-all"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+                className="bg-white/5 backdrop-blur-md border border-white/10 text-white px-8 py-4 rounded-xl font-bold text-sm tracking-wide hover:bg-white/10 hover:border-white/20 transition-all"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Get In Touch
               </motion.button>
@@ -495,7 +497,7 @@ export default function Home() {
               About Me
             </motion.h2>
 
-            <div className="grid md:grid-cols-2 gap-16">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
               {/* Left — Bio */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -577,7 +579,7 @@ export default function Home() {
                   <h3 className="text-sm font-semibold text-[#888] uppercase tracking-wider mb-4">
                     My Skills
                   </h3>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2.5">
                     {skills.map((skill) => (
                       <motion.span
                         key={skill}
@@ -771,13 +773,12 @@ export default function Home() {
                   <div className="flex flex-col md:flex-row md:items-start gap-6">
                     {/* Project image */}
                     {proj.image_url && (
-                      <div className="w-full md:w-48 h-32 rounded-lg overflow-hidden bg-[#1a1a1a] flex-shrink-0">
+                      <div className="w-full md:w-56 lg:w-64 h-56 md:h-auto rounded-xl overflow-hidden bg-[#1a1a1a] flex-shrink-0 relative">
                         <Image
                           src={proj.image_url}
                           alt={proj.title}
-                          width={192}
-                          height={128}
-                          className="object-cover w-full h-full"
+                          fill
+                          className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
                         />
                       </div>
                     )}
@@ -1142,10 +1143,10 @@ export default function Home() {
                   >
                     GitHub
                   </a>
-                  <a href="#" className="block footer-link">
+                  <a href="https://www.linkedin.com/in/israel-ojehonmon-24775626a" className="block footer-link">
                     LinkedIn
                   </a>
-                  <a href="#" className="block footer-link">
+                  <a href="https://x.com/IOjehonmon31052/photo" className="block footer-link">
                     Twitter / X
                   </a>
                   <a
