@@ -71,7 +71,7 @@ export default function Home() {
     "DRIZZLE-ORM",
     "SQL",
     "AI/LLM Integrations and RAG (vector search)",
-    "Fullstack Applications"
+    "Fullstack Applications",
     "Git",
     "GitHub",
     "REST APIs",
