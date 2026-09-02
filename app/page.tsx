@@ -70,7 +70,8 @@ export default function Home() {
     "Supabase",
     "DRIZZLE-ORM",
     "SQL",
-    "AI/LLM Integrations and vector search",
+    "AI/LLM Integrations and RAG (vector search)",
+    "Fullstack Applications"
     "Git",
     "GitHub",
     "REST APIs",
