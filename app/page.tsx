@@ -111,6 +111,51 @@ export default function Home() {
     fetchProjects();
   }, []);
 
+  const skills = [
+    "React",
+    "Next.js",
+    "JavaScript",
+    "TypeScript",
+    "Tailwind CSS",
+    "Supabase",
+    "DRIZZLE-ORM",
+    "SQL",
+    "AI/LLM Integrations and RAG (vector search)",
+    "Fullstack Applications"
+    "Git",
+    "GitHub",
+    "REST APIs",
+    "Framer Motion",
+    "Responsive Design",
+  ];
+
+  const experiences = [
+    {
+      role: "Frontend Developer",
+      company: "Aquila Cyber",
+      period: "Nov 2025 — Present",
+      description:
+        "Currently responsible for building clean user interfaces, working closely with designers, backend engineers, and product managers. Crafted responsive web designs that boosted user engagement by 30%, optimized website performance reducing load times by 50%, and integrated APIs seamlessly to expand functionality and user experience.",
+      skills: ["Next.js", "TypeScript", "Tailwind CSS", "REST APIs", "Agile"],
+    },
+    {
+      role: "Frontend Developer (Intern) & QA Tester",
+      company: "Myinstashop",
+      period: "Apr 2025 — Present",
+      description:
+        "Assisted in building and improving user-facing features while ensuring product quality through systematic testing. Developed responsive UI components using Next.js, Tailwind, and TypeScript. Translated Figma designs into clean, reusable code, identified and tracked bugs, and performed manual/functional testing before releases.",
+      skills: ["Next.js", "Tailwind CSS", "TypeScript", "QA Testing", "Figma"],
+    },
+    {
+      role: "Frontend Developer (Intern)",
+      company: "Tverza",
+      period: "Jan 2025 — Apr 2025",
+      description:
+        "Tverza is the single point of entry and exit into the World Business Activities, Revolutionizing the way real-world businesses operate in the digital realm redefining transactions within supply chains.Assisted in building and improving user interfaces with Next.js, Tailwind CSS, and TypeScript. Collaborated with designers to create visually appealing UI/UX solutions, integrated APIs to enhance functionality, and participated in code reviews fostering a culture of quality and learning.",
+      skills: ["Next.js", "JavaScript", "TypeScript", "Tailwind CSS", "Git"],
+    },
+  ];
+
   useEffect(() => {
     const sections = NAV_SECTIONS
       .map((section) => document.getElementById(section))
