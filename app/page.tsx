@@ -310,7 +310,7 @@ export default function Home() {
       </a>
 
       <div className="min-h-screen bg-[#0a0a0a] relative overflow-hidden text-white">
-        {/* Background orbs — pure CSS animations, no JS cost */}
+        {/* Static background accents kept outside the content flow. */}
         <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
           <div className="orb orb-1" />
           <div className="orb orb-2" />
@@ -330,7 +330,7 @@ export default function Home() {
 
         {/* =============== NAVBAR =============== */}
         <nav
-          className="fixed top-0 w-full z-50 bg-[#0a0a0a]/60 backdrop-blur-2xl border-b border-white/5 transition-all duration-300"
+          className="fixed top-0 w-full z-50 bg-[#0a0a0a] border-b border-white/5 transition-colors duration-300"
           aria-label="Main navigation"
           role="banner"
         >
@@ -432,7 +432,7 @@ export default function Home() {
             {isMenuOpen && (
               <motion.div
                 id="mobile-nav-menu"
-                className="md:hidden bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-[#1a1a1a]"
+                className="md:hidden bg-[#0a0a0a] border-b border-[#1a1a1a]"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
