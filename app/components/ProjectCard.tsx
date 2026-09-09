@@ -37,18 +37,16 @@ github,
 
                   </div>
 
-                  <Link href={link} target='_blank' className='w-full cursor-pointer overflow-hidden rounded-lg'>
-                     <FramerImage 
-                     src={image}
-                     alt={title}
-                     className='w-full h-auto rounded-lg'
-                     whileHover={{ scale: 1.05 }}
-                     transition={{duration: 0.2}}
-                     priority
-                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
-
-                     />
-                  </Link>
+                   <Link href={link} target='_blank' className='w-full cursor-pointer overflow-hidden rounded-lg block relative aspect-video bg-[#1a1a1a]'>
+                      <Image
+                      src={image}
+                      alt={title}
+                      fill
+                      className='object-cover w-full h-full rounded-lg'
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
+                      />
+                   </Link>
 
                   <div className='w-full flex flex-col items-start justify-between mt-4'>
                      <span className='text-primary font-semibold text-lg dark:text-primaryDark'>

@@ -6,7 +6,8 @@
   --foreground: #f5f5f5;
   --card-bg: #111111;
   --card-border: #1a1a1a;
-  --muted: #888888;
+  --muted: #999999;
+  --muted-light: #8a8a8a;
   --accent: #ffffff;
 }
 
@@ -30,6 +31,55 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ================================
+   SKIP LINK (Accessibility)
+   ================================ */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 100;
+  background: #fff;
+  color: #0a0a0a;
+  padding: 12px 24px;
+  border-radius: 0 0 8px 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* ================================
+   FOCUS-VISIBLE (Accessibility)
+   ================================ */
+*:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Override for form inputs — inset ring instead */
+.form-input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+/* Visually hidden — for screen reader labels */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 /* Custom selection */
 ::selection {
   background: rgba(255, 255, 255, 0.15);
@@ -51,7 +101,9 @@ body {
   background: #444;
 }
 
-/* Glowing orb backgrounds */
+/* ================================
+   ORB BACKGROUNDS (Pure CSS — no JS)
+   ================================ */
 .orb {
   position: absolute;
   border-radius: 50%;
@@ -59,6 +111,7 @@ body {
   opacity: 0.4;
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
 }
 .orb-1 {
   width: 500px;
@@ -66,6 +119,7 @@ body {
   background: radial-gradient(circle, rgba(60, 60, 60, 0.6) 0%, transparent 70%);
   top: -100px;
   right: -100px;
+  animation: orb-float-1 20s linear infinite;
 }
 .orb-2 {
   width: 400px;
@@ -73,6 +127,7 @@ body {
   background: radial-gradient(circle, rgba(50, 50, 50, 0.5) 0%, transparent 70%);
   top: 30%;
   left: -150px;
+  animation: orb-float-2 25s linear infinite;
 }
 .orb-3 {
   width: 600px;
@@ -80,6 +135,20 @@ body {
   background: radial-gradient(circle, rgba(40, 40, 40, 0.4) 0%, transparent 70%);
   bottom: -200px;
   right: -200px;
+  animation: orb-float-3 30s linear infinite;
+}
+
+@keyframes orb-float-1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, 20px); }
+}
+@keyframes orb-float-2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-20px, -30px); }
+}
+@keyframes orb-float-3 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-40px, 20px); }
 }
 
 /* Section divider lines */
@@ -87,7 +156,7 @@ body {
   display: inline-block;
   width: 32px;
   height: 1px;
-  background: #666;
+  background: #999;
   vertical-align: middle;
   margin-right: 12px;
 }
@@ -172,10 +241,10 @@ body {
   font-size: 14px;
   font-family: 'Outfit', sans-serif;
   outline: none;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .form-input::placeholder {
-  color: #555;
+  color: #777;
 }
 .form-input:focus {
   border-color: #444;
@@ -183,7 +252,7 @@ body {
 
 /* Footer */
 .footer-link {
-  color: #666;
+  color: #999;
   font-size: 14px;
   transition: color 0.2s ease;
   text-decoration: none;
@@ -213,4 +282,58 @@ body {
 
 .glow-text {
   text-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+/* Scroll progress bar */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #fff;
+  z-index: 60;
+  transform-origin: left;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+/* Image placeholder shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.image-placeholder {
+  background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ================================
+   PREFERS-REDUCED-MOTION
+   ================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .orb-1,
+  .orb-2,
+  .orb-3 {
+    animation: none;
+  }
+
+  .experience-card:hover,
+  .project-card:hover {
+    transform: none;
+  }
 }
