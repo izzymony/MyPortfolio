@@ -759,9 +759,8 @@ export default function Home() {
 
             <motion.div
               className="space-y-4"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.05 }}
+              initial={false}
+              animate="visible"
               variants={staggerContainer}
             >
               {loading &&
