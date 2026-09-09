@@ -38,7 +38,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState<string>("home");
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [project, setProject] = useState<Projects[]>([]);
-  const [, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [expandedExp, setExpandedExp] = useState<number | null>(0);
 
@@ -764,7 +764,34 @@ export default function Home() {
               viewport={{ once: true, amount: 0.05 }}
               variants={staggerContainer}
             >
-              {project.map((proj) => (
+              {loading &&
+                Array.from({ length: 3 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col md:flex-row md:items-start gap-6 p-6 rounded-2xl border border-[#1a1a1a] bg-[#111]"
+                  >
+                    <div className="w-full md:w-56 lg:w-64 h-56 md:h-56 lg:h-64 rounded-xl bg-[#1a1a1a] animate-pulse flex-shrink-0" />
+                    <div className="flex-1 space-y-3">
+                      <div className="h-5 w-3/4 rounded bg-[#1a1a1a] animate-pulse" />
+                      <div className="h-4 w-full rounded bg-[#1a1a1a] animate-pulse" />
+                      <div className="h-4 w-5/6 rounded bg-[#1a1a1a] animate-pulse" />
+                      <div className="flex gap-2">
+                        <div className="h-6 w-16 rounded-full bg-[#1a1a1a] animate-pulse" />
+                        <div className="h-6 w-16 rounded-full bg-[#1a1a1a] animate-pulse" />
+                        <div className="h-6 w-16 rounded-full bg-[#1a1a1a] animate-pulse" />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+              {!loading && project.length === 0 && (
+                <p className="text-[#888] text-center py-12">
+                  No projects to display yet.
+                </p>
+              )}
+
+              {!loading &&
+                project.map((proj) => (
                 <motion.div
                   key={proj.id}
                   className="project-card"
@@ -774,11 +801,12 @@ export default function Home() {
                   <div className="flex flex-col md:flex-row md:items-start gap-6">
                     {/* Project image */}
                     {proj.image_url && (
-                      <div className="w-full md:w-56 lg:w-64 h-56 md:h-auto rounded-xl overflow-hidden bg-[#1a1a1a] flex-shrink-0 relative">
+                      <div className="w-full md:w-56 lg:w-64 h-56 md:h-56 lg:h-64 rounded-xl overflow-hidden bg-[#1a1a1a] flex-shrink-0 relative">
                         <Image
                           src={proj.image_url}
                           alt={proj.title}
                           fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
                         />
                       </div>
