@@ -38,7 +38,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState<string>("home");
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [project, setProject] = useState<Projects[]>([]);
-  const [, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [expandedExp, setExpandedExp] = useState<number | null>(0);
 
@@ -71,7 +71,7 @@ export default function Home() {
     "DRIZZLE-ORM",
     "SQL",
     "AI/LLM Integrations and RAG (vector search)",
-    "Fullstack Applications"
+    "Fullstack Applications",
     "Git",
     "GitHub",
     "REST APIs",
@@ -764,7 +764,34 @@ export default function Home() {
               viewport={{ once: true, amount: 0.05 }}
               variants={staggerContainer}
             >
-              {project.map((proj) => (
+              {loading &&
+                Array.from({ length: 3 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col md:flex-row md:items-start gap-6 p-6 rounded-2xl border border-[#1a1a1a] bg-[#111]"
+                  >
+                    <div className="w-full md:w-56 lg:w-64 h-56 md:h-56 lg:h-64 rounded-xl bg-[#1a1a1a] animate-pulse flex-shrink-0" />
+                    <div className="flex-1 space-y-3">
+                      <div className="h-5 w-3/4 rounded bg-[#1a1a1a] animate-pulse" />
+                      <div className="h-4 w-full rounded bg-[#1a1a1a] animate-pulse" />
+                      <div className="h-4 w-5/6 rounded bg-[#1a1a1a] animate-pulse" />
+                      <div className="flex gap-2">
+                        <div className="h-6 w-16 rounded-full bg-[#1a1a1a] animate-pulse" />
+                        <div className="h-6 w-16 rounded-full bg-[#1a1a1a] animate-pulse" />
+                        <div className="h-6 w-16 rounded-full bg-[#1a1a1a] animate-pulse" />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+              {!loading && project.length === 0 && (
+                <p className="text-[#888] text-center py-12">
+                  No projects to display yet.
+                </p>
+              )}
+
+              {!loading &&
+                project.map((proj, index) => (
                 <motion.div
                   key={proj.id}
                   className="project-card"
@@ -774,13 +801,28 @@ export default function Home() {
                   <div className="flex flex-col md:flex-row md:items-start gap-6">
                     {/* Project image */}
                     {proj.image_url && (
-                      <div className="w-full md:w-56 lg:w-64 h-56 md:h-auto rounded-xl overflow-hidden bg-[#1a1a1a] flex-shrink-0 relative">
-                        <Image
-                          src={proj.image_url}
-                          alt={proj.title}
-                          fill
-                          className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
-                        />
+                      <div className="w-full md:w-56 lg:w-64 h-56 md:h-56 lg:h-64 rounded-xl overflow-hidden bg-[#1a1a1a] flex-shrink-0 relative">
+                        {proj.image_url ? (
+                          <Image
+                            src={proj.image_url}
+                            alt={proj.title}
+                            width={256}
+                            height={224}
+                            sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1023px) 224px, 256px"
+                            className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
+                            priority={index === 0}
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = 'none';
+                            }}
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-[#444]">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m7.5-7.5l-5.159 5.159a2.25 2.25 0 01-3.182 0L6.75 9.75m9 6l2.25-2.25m0 0l-2.25-2.25m2.25 2.25L21 21" />
+                            </svg>
+                          </div>
+                        )}
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
