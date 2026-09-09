@@ -88,12 +88,11 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState<string>("home");
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [project, setProject] = useState<Projects[]>([]);
-  const [, setLoading] = useState(true);
   const [expandedExp, setExpandedExp] = useState<number | null>(0);
 
-  // Refs for performance — direct DOM manipulation instead of state
   const progressBarRef = useRef<HTMLDivElement>(null);
-  const scrollProgressRef = useRef(0);
+  const backToTopRef = useRef<HTMLButtonElement>(null);
+  const activeSectionRef = useRef("home");
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -101,55 +100,74 @@ export default function Home() {
       try {
         const { data } = await supabase
           .from("projects")
-          .select("*")
+          .select("id, title, description, image_url, tech_stack, live_url, github_url")
           .order("created_at", { ascending: false });
 
         if (data) setProject(data);
-        setLoading(false);
       } catch (err) {
         console.error("Unable to fetch data:", err);
-      } finally {
-        setLoading(false);
       }
     };
     fetchProjects();
   }, []);
 
-  // ── Throttled scroll handler (rAF-based, no unnecessary re-renders) ──
+  useEffect(() => {
+    const sections = NAV_SECTIONS
+      .map((section) => document.getElementById(section))
+      .filter((section): section is HTMLElement => section !== null);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (first, second) =>
+              Math.abs(
+                first.boundingClientRect.top +
+                  first.boundingClientRect.height / 2 -
+                  window.innerHeight / 2,
+              ) -
+              Math.abs(
+                second.boundingClientRect.top +
+                  second.boundingClientRect.height / 2 -
+                  window.innerHeight / 2,
+              ),
+          )[0];
+
+        if (!visibleEntry) return;
+
+        const section = visibleEntry.target.id;
+        if (activeSectionRef.current !== section) {
+          activeSectionRef.current = section;
+          setActiveSection(section);
+        }
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
   const handleScroll = useCallback(() => {
-    if (rafRef.current !== null) return; // Already scheduled
+    if (rafRef.current !== null) return;
 
     rafRef.current = requestAnimationFrame(() => {
-      // Update active section
-      const current = NAV_SECTIONS.find((section) => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
-      });
-      if (current) {
-        setActiveSection(current);
-      }
-
-      // Update scroll progress via direct DOM mutation (no state → no re-render)
       const scrollHeight =
         document.documentElement.scrollHeight -
         document.documentElement.clientHeight;
-      const scrolled = window.scrollY;
-      const progress = scrollHeight > 0 ? scrolled / scrollHeight : 0;
-      scrollProgressRef.current = progress;
+      const progress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
 
       if (progressBarRef.current) {
         progressBarRef.current.style.transform = `scaleX(${progress})`;
       }
 
-      // Show/hide back-to-top button via class toggle
-      const backToTop = document.getElementById("back-to-top-btn");
-      if (backToTop) {
-        const showBtn = progress > 0.2;
-        backToTop.setAttribute("data-visible", showBtn ? "true" : "false");
+      if (backToTopRef.current) {
+        backToTopRef.current.setAttribute(
+          "data-visible",
+          progress > 0.2 ? "true" : "false",
+        );
       }
 
       rafRef.current = null;
