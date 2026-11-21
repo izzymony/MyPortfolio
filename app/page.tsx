@@ -498,24 +498,24 @@ export default function Home() {
         {/* =============== HERO =============== */}
         <section
           id="home"
-          className="min-h-screen flex items-center justify-center px-6 pt-20 pb-16 relative z-10"
+          className="min-h-[92vh] flex items-center justify-center px-6 pt-24 pb-16 relative z-10"
         >
-          <div className="text-center max-w-4xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto">
             {/* Badge */}
             <motion.div
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#111] border border-[#1a1a1a] rounded-full text-xs sm:text-sm text-[#888] mb-6"
-              initial={{ opacity: 0, y: 20 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1 bg-[#111] border border-[#1a1a1a] rounded-full text-xs text-[#888] mb-5 tracking-wide"
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <span>✨</span>
+              <span className="text-amber-400">✨</span>
               <span>Welcome to my portfolio</span>
             </motion.div>
 
-            {/* Hero Heading */}
+            {/* Hero Heading - Refined UI/UX scale and line rhythm */}
             <motion.h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-[1.15] tracking-tight max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 30 }}
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-5 leading-[1.2] tracking-tight max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
@@ -525,9 +525,9 @@ export default function Home() {
               </span>
             </motion.h1>
 
-            {/* Subtitle / Value Proposition */}
+            {/* Subtitle / Value Proposition - Clean visual hierarchy and readable typography */}
             <motion.div
-              className="text-[#999] text-base sm:text-lg mb-8 max-w-2xl mx-auto leading-relaxed space-y-3"
+              className="text-[#999] text-sm sm:text-base mb-8 max-w-xl mx-auto leading-relaxed space-y-2.5"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -538,7 +538,7 @@ export default function Home() {
                 frontend and backend, using React, Next.js, TypeScript, Node.js,
                 and Express.js to turn ideas into functional digital products.
               </p>
-              <p className="text-sm sm:text-base text-[#777]">
+              <p className="text-xs sm:text-sm text-[#777]">
                 My experience includes designing intuitive user interfaces,
                 developing REST APIs, implementing authentication systems, and
                 working with relational databases such as PostgreSQL and MySQL.
@@ -547,24 +547,24 @@ export default function Home() {
 
             {/* CTA Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+              className="flex flex-col sm:flex-row gap-3.5 justify-center mb-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
               <motion.button
                 onClick={() => scrollToSection("projects")}
-                className="bg-white text-black px-7 py-3.5 rounded-xl font-semibold text-sm tracking-wide hover:bg-white/90 transition-all shadow-[0_0_30px_rgba(255,255,255,0.12)] hover:shadow-[0_0_50px_rgba(255,255,255,0.2)] cursor-pointer"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.96 }}
+                className="bg-white text-black px-6 py-3 rounded-xl font-semibold text-sm tracking-wide hover:bg-white/90 transition-all shadow-[0_0_25px_rgba(255,255,255,0.12)] hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] cursor-pointer"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
                 Explore My Work
               </motion.button>
               <motion.button
                 onClick={() => scrollToSection("contact")}
-                className="bg-white/5 backdrop-blur-md border border-white/10 text-white px-7 py-3.5 rounded-xl font-semibold text-sm tracking-wide hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.96 }}
+                className="bg-white/5 backdrop-blur-md border border-white/10 text-white px-6 py-3 rounded-xl font-semibold text-sm tracking-wide hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
                 Get In Touch
               </motion.button>
@@ -572,12 +572,12 @@ export default function Home() {
 
             {/* Tech Stack Row */}
             <motion.div
-              className="flex items-center justify-center gap-4 sm:gap-6 text-[#555] text-xs"
+              className="flex items-center justify-center gap-4 sm:gap-5 text-[#555] text-xs"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 1.0 }}
             >
-              <span className="text-[#444] font-medium tracking-wider text-[11px]">
+              <span className="text-[#444] font-medium tracking-wider text-[10px] uppercase">
                 TECH STACK
               </span>
               <span className="text-[#222]">|</span>
@@ -594,7 +594,7 @@ export default function Home() {
                 ].map((tech) => (
                   <span
                     key={tech}
-                    className="text-[#555] hover:text-white transition-colors cursor-default"
+                    className="text-[#666] hover:text-white transition-colors cursor-default text-xs"
                   >
                     {tech}
                   </span>
@@ -948,13 +948,13 @@ export default function Home() {
                   <div className="flex flex-col md:flex-row md:items-start gap-6">
                     {/* Project image */}
                     {proj.image_url && (
-                      <div className="w-full md:w-56 lg:w-64 h-56 md:h-56 lg:h-64 rounded-xl overflow-hidden bg-[#1a1a1a] flex-shrink-0 relative">
+                      <div className="w-full md:w-64 lg:w-72 h-48 md:h-56 lg:h-60 rounded-xl overflow-hidden bg-[#1a1a1a] flex-shrink-0 relative border border-white/5">
                         <Image
                           src={proj.image_url}
                           alt={proj.title}
                           fill
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
+                          className="object-cover object-top w-full h-full transition-transform duration-700 hover:scale-105"
                         />
                       </div>
                     )}
