@@ -9,11 +9,13 @@ import { motion, AnimatePresence } from "framer-motion";
 interface Projects {
   id: string;
   title: string;
+  category?: string;
   description: string;
   image_url: string;
   tech_stack: string[];
   live_url?: string;
   github_url?: string;
+  features?: string[];
 }
 
 // Animation variants
@@ -42,6 +44,65 @@ export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [expandedExp, setExpandedExp] = useState<number | null>(0);
 
+  const defaultProjects: Projects[] = [
+    {
+      id: "lensconnect",
+      title: "LensConnect",
+      category: "Full-Stack Web Application",
+      description:
+        "LensConnect is a photography marketplace built to connect clients with photographers. The platform allows photographers to showcase their portfolios while helping clients discover photographers based on their preferences. I developed the application with a focus on authentication, role-based access, API development, database integration, and responsive user experiences.",
+      image_url: "/lensconnect.png",
+      tech_stack: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Node.js",
+        "Express.js",
+        "MySQL",
+        "Drizzle ORM",
+        "REST APIs",
+        "JWT Authentication",
+      ],
+      features: [
+        "Separate authentication experiences for clients and photographers",
+        "Role-based authentication and authorization",
+        "Photographer profiles and portfolio management",
+        "Photographer discovery and search",
+        "Database integration and management",
+        "REST API development",
+        "Secure authentication using JWT and HTTP-only cookies",
+        "Responsive user interfaces",
+      ],
+      live_url: "https://lesnconnect.vercel.app/",
+      github_url: "https://github.com/LensConnect/lensconnect",
+    },
+    {
+      id: "carrentify",
+      title: "CarRentify",
+      category: "Full-Stack Web Application",
+      description:
+        "A car rental platform built with Next.js and Firebase, featuring real-time vehicle booking, user authentication, and responsive user interfaces.",
+      image_url: "/carrentify.png",
+      tech_stack: [
+        "Next.js",
+        "JavaScript",
+        "TypeScript",
+        "Tailwind CSS",
+        "Firebase",
+        "REST APIs",
+      ],
+      features: [
+        "Real-time vehicle discovery and reservation workflow",
+        "User authentication and profile management",
+        "Interactive vehicle catalog with filtering and search",
+        "Responsive, mobile-first design",
+      ],
+      live_url: "https://car-rentify-six.vercel.app/",
+      github_url: "https://github.com/izzymony/carRentify/tree/cars",
+    },
+  ];
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -50,10 +111,17 @@ export default function Home() {
           .select("*")
           .order("created_at", { ascending: false });
 
-        if (data) setProject(data);
-        setLoading(false);
+        if (data && data.length > 0) {
+          const remoteWithoutDuplicate = data.filter(
+            (p) => p.title?.toLowerCase() !== "lensconnect"
+          );
+          setProject([defaultProjects[0], ...remoteWithoutDuplicate]);
+        } else {
+          setProject(defaultProjects);
+        }
       } catch (err) {
         console.error("Unable to fetch data:", err);
+        setProject(defaultProjects);
       } finally {
         setLoading(false);
       }
@@ -61,22 +129,51 @@ export default function Home() {
     fetchProjects();
   }, []);
 
-  const skills = [
-    "React",
-    "Next.js",
-    "JavaScript",
-    "TypeScript",
-    "Tailwind CSS",
-    "Supabase",
-    "DRIZZLE-ORM",
-    "SQL",
-    "AI/LLM Integrations and RAG (vector search)",
-    "Fullstack Applications",
-    "Git",
-    "GitHub",
-    "REST APIs",
-    "Framer Motion",
-    "Responsive Design",
+  const skillCategories = [
+    {
+      name: "Frontend Development",
+      skills: [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "TypeScript",
+        "React.js",
+        "Next.js",
+        "Tailwind CSS",
+        "shadcn/ui",
+      ],
+    },
+    {
+      name: "Backend Development",
+      skills: [
+        "Node.js",
+        "Express.js",
+        "REST API Development",
+        "Authentication and Authorization",
+        "API Integration",
+      ],
+    },
+    {
+      name: "Databases and ORM",
+      skills: [
+        "MySQL",
+        "PostgreSQL",
+        "Supabase",
+        "Drizzle ORM",
+        "SQL",
+      ],
+    },
+    {
+      name: "Testing and Development Tools",
+      skills: [
+        "Playwright",
+        "Git",
+        "GitHub",
+        "VS Code",
+        "Bun",
+        "Postman",
+      ],
+    },
   ];
 
   const experiences = [
@@ -85,24 +182,24 @@ export default function Home() {
       company: "Aquila Cyber",
       period: "Nov 2025 — Present",
       description:
-        "Currently responsible for building clean user interfaces, working closely with designers, backend engineers, and product managers. Crafted responsive web designs that boosted user engagement by 30%, optimized website performance reducing load times by 50%, and integrated APIs seamlessly to expand functionality and user experience.",
-      skills: ["Next.js", "TypeScript", "Tailwind CSS", "REST APIs", "Agile"],
+        "Responsible for building responsive, accessible web applications and collaborating across cross-functional teams with designers, backend engineers, and product managers. Built performant UI architectures that improved user engagement by 30%, optimized loading times by 50%, and integrated REST APIs to power real-time data flows and seamless digital experiences.",
+      skills: ["Next.js", "TypeScript", "Tailwind CSS", "REST APIs", "Node.js", "Agile"],
     },
     {
       role: "Frontend Developer (Intern) & QA Tester",
       company: "Myinstashop",
       period: "Apr 2025 — Present",
       description:
-        "Assisted in building and improving user-facing features while ensuring product quality through systematic testing. Developed responsive UI components using Next.js, Tailwind, and TypeScript. Translated Figma designs into clean, reusable code, identified and tracked bugs, and performed manual/functional testing before releases.",
-      skills: ["Next.js", "Tailwind CSS", "TypeScript", "QA Testing", "Figma"],
+        "Assisted in developing user-facing web features while ensuring product quality and stability through systematic testing. Built modular components with Next.js and TypeScript, translated Figma designs into accessible code, identified and tracked bugs, and performed regression, API integration, and manual/functional testing before releases.",
+      skills: ["Next.js", "Tailwind CSS", "TypeScript", "Playwright", "QA Testing", "Figma"],
     },
     {
       role: "Frontend Developer (Intern)",
       company: "Tverza",
       period: "Jan 2025 — Apr 2025",
       description:
-        "Tverza is the single point of entry and exit into the World Business Activities, Revolutionizing the way real-world businesses operate in the digital realm redefining transactions within supply chains.Assisted in building and improving user interfaces with Next.js, Tailwind CSS, and TypeScript. Collaborated with designers to create visually appealing UI/UX solutions, integrated APIs to enhance functionality, and participated in code reviews fostering a culture of quality and learning.",
-      skills: ["Next.js", "JavaScript", "TypeScript", "Tailwind CSS", "Git"],
+        "Contributed to building and optimizing digital interfaces for enterprise commerce workflows. Collaborated with designers to deliver responsive UI/UX solutions using Next.js, TypeScript, and Tailwind CSS, integrated backend REST APIs, and participated in rigorous code reviews to maintain engineering quality.",
+      skills: ["Next.js", "JavaScript", "TypeScript", "REST APIs", "Tailwind CSS", "Git"],
     },
   ];
 
@@ -401,12 +498,12 @@ export default function Home() {
         {/* =============== HERO =============== */}
         <section
           id="home"
-          className="min-h-screen flex items-center justify-center px-6 relative z-10"
+          className="min-h-screen flex items-center justify-center px-6 pt-20 pb-16 relative z-10"
         >
-          <div className="text-center max-w-3xl mx-auto">
+          <div className="text-center max-w-4xl mx-auto">
             {/* Badge */}
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 bg-[#111] border border-[#1a1a1a] rounded-full text-sm text-[#888] mb-8"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#111] border border-[#1a1a1a] rounded-full text-xs sm:text-sm text-[#888] mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -417,48 +514,57 @@ export default function Home() {
 
             {/* Hero Heading */}
             <motion.h1
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-[1.1] tracking-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-[1.15] tracking-tight max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Crafting Digital
-              <br />
-              <span className="gradient-text glow-text relative inline-block">Magic</span>
+              Building Modern Digital Experiences —{" "}
+              <span className="gradient-text glow-text inline-block">
+                Frontend to Backend.
+              </span>
             </motion.h1>
 
-            {/* Subtitle */}
-            <motion.p
-              className="text-[#888] text-lg sm:text-xl md:text-2xl mb-10 max-w-2xl mx-auto leading-relaxed"
+            {/* Subtitle / Value Proposition */}
+            <motion.div
+              className="text-[#999] text-base sm:text-lg mb-8 max-w-2xl mx-auto leading-relaxed space-y-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              I&apos;m a frontend developer. I craft elegant and efficient frontend solutions
-              that transform ideas into seamless digital experiences with clean,
-              performant code.
-            </motion.p>
+              <p>
+                I&apos;m a Full-Stack Developer specializing in building modern,
+                responsive, and scalable web applications. I work across the
+                frontend and backend, using React, Next.js, TypeScript, Node.js,
+                and Express.js to turn ideas into functional digital products.
+              </p>
+              <p className="text-sm sm:text-base text-[#777]">
+                My experience includes designing intuitive user interfaces,
+                developing REST APIs, implementing authentication systems, and
+                working with relational databases such as PostgreSQL and MySQL.
+              </p>
+            </motion.div>
 
             {/* CTA Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-5 justify-center mb-16"
+              className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
               <motion.button
                 onClick={() => scrollToSection("projects")}
-                className="bg-white text-black px-8 py-4 rounded-xl font-bold text-sm tracking-wide hover:bg-white/90 transition-all shadow-[0_0_40px_rgba(255,255,255,0.15)] hover:shadow-[0_0_60px_rgba(255,255,255,0.25)]"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className="bg-white text-black px-7 py-3.5 rounded-xl font-semibold text-sm tracking-wide hover:bg-white/90 transition-all shadow-[0_0_30px_rgba(255,255,255,0.12)] hover:shadow-[0_0_50px_rgba(255,255,255,0.2)] cursor-pointer"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
               >
                 Explore My Work
               </motion.button>
               <motion.button
                 onClick={() => scrollToSection("contact")}
-                className="bg-white/5 backdrop-blur-md border border-white/10 text-white px-8 py-4 rounded-xl font-bold text-sm tracking-wide hover:bg-white/10 hover:border-white/20 transition-all"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className="bg-white/5 backdrop-blur-md border border-white/10 text-white px-7 py-3.5 rounded-xl font-semibold text-sm tracking-wide hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
               >
                 Get In Touch
               </motion.button>
@@ -466,16 +572,30 @@ export default function Home() {
 
             {/* Tech Stack Row */}
             <motion.div
-              className="flex items-center justify-center gap-6 text-[#555] text-xs"
+              className="flex items-center justify-center gap-4 sm:gap-6 text-[#555] text-xs"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 1.0 }}
             >
-              <span className="text-[#444]">TECH STACK</span>
+              <span className="text-[#444] font-medium tracking-wider text-[11px]">
+                TECH STACK
+              </span>
               <span className="text-[#222]">|</span>
-              <div className="flex items-center gap-4">
-                {["React", "Next.js", "TypeScript", "Tailwind"].map((tech) => (
-                  <span key={tech} className="text-[#555] hover:text-white transition-colors cursor-default">
+              <div className="flex items-center gap-3 sm:gap-4 flex-wrap justify-center">
+                {[
+                  "React",
+                  "Next.js",
+                  "TypeScript",
+                  "Node.js",
+                  "Express.js",
+                  "PostgreSQL",
+                  "MySQL",
+                  "Tailwind",
+                ].map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-[#555] hover:text-white transition-colors cursor-default"
+                  >
                     {tech}
                   </span>
                 ))}
@@ -507,16 +627,26 @@ export default function Home() {
                 transition={{ duration: 0.6 }}
               >
                 <p className="text-[#aaa] text-base leading-relaxed mb-6">
-                  I&apos;m a passionate frontend developer with experience
-                  creating modern web applications. I love turning complex
-                  problems into simple, beautiful, and intuitive designs that
-                  users enjoy interacting with.
+                  I&apos;m a Full-Stack Developer passionate about building
+                  meaningful digital products and solving real-world problems
+                  through technology.
+                </p>
+                <p className="text-[#aaa] text-base leading-relaxed mb-6">
+                  My development experience spans both frontend and backend
+                  engineering. On the frontend, I work with React, Next.js,
+                  TypeScript, and Tailwind CSS to create responsive, accessible,
+                  and user-friendly applications.
+                </p>
+                <p className="text-[#aaa] text-base leading-relaxed mb-6">
+                  On the backend, I build RESTful APIs and server-side
+                  applications using Node.js and Express.js. I also work with
+                  relational databases, including PostgreSQL and MySQL,
+                  database management, authentication, and API integration.
                 </p>
                 <p className="text-[#aaa] text-base leading-relaxed mb-8">
-                  Currently, I&apos;m focused on React, TypeScript, and
-                  Next.js, building scalable and performant
-                  applications that prioritize both developer
-                  experience and end-user satisfaction.
+                  I&apos;m currently focused on building scalable applications,
+                  improving my software engineering skills, and turning ideas into
+                  production-ready products.
                 </p>
 
                 {/* Social links */}
@@ -528,6 +658,7 @@ export default function Home() {
                     className="w-10 h-10 rounded-full bg-[#111] border border-[#1a1a1a] flex items-center justify-center text-[#888] hover:text-white hover:border-[#333] transition-all"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
+                    title="GitHub"
                   >
                     <svg
                       className="w-4 h-4"
@@ -538,10 +669,13 @@ export default function Home() {
                     </svg>
                   </motion.a>
                   <motion.a
-                    href="#"
+                    href="https://www.linkedin.com/in/israel-ojehonmon-24775626a"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-[#111] border border-[#1a1a1a] flex items-center justify-center text-[#888] hover:text-white hover:border-[#333] transition-all"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
+                    title="LinkedIn"
                   >
                     <svg
                       className="w-4 h-4"
@@ -552,10 +686,13 @@ export default function Home() {
                     </svg>
                   </motion.a>
                   <motion.a
-                    href="#"
+                    href="https://x.com/IOjehonmon31052/photo"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-[#111] border border-[#1a1a1a] flex items-center justify-center text-[#888] hover:text-white hover:border-[#333] transition-all"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
+                    title="Twitter / X"
                   >
                     <svg
                       className="w-4 h-4"
@@ -577,19 +714,28 @@ export default function Home() {
               >
                 {/* My Skills label */}
                 <div className="bg-[#111] border border-[#1a1a1a] rounded-xl p-6 mb-6">
-                  <h3 className="text-sm font-semibold text-[#888] uppercase tracking-wider mb-4">
-                    My Skills
+                  <h3 className="text-sm font-semibold text-[#888] uppercase tracking-wider mb-6">
+                    Technical Skills
                   </h3>
-                  <div className="flex flex-wrap gap-2.5">
-                    {skills.map((skill) => (
-                      <motion.span
-                        key={skill}
-                        className="skill-pill"
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
-                        {skill}
-                      </motion.span>
+                  <div className="space-y-6">
+                    {skillCategories.map((group) => (
+                      <div key={group.name}>
+                        <h4 className="text-xs font-semibold text-[#666] uppercase tracking-wider mb-3">
+                          {group.name}
+                        </h4>
+                        <div className="flex flex-wrap gap-2.5">
+                          {group.skills.map((skill) => (
+                            <motion.span
+                              key={skill}
+                              className="skill-pill"
+                              whileHover={{ scale: 1.05 }}
+                            >
+                              <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                              {skill}
+                            </motion.span>
+                          ))}
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -613,13 +759,15 @@ export default function Home() {
                       </svg>
                     </div>
                     <h3 className="text-sm font-semibold text-white">
-                      Experience
+                      Professional Focus
                     </h3>
                   </div>
                   <p className="text-[#888] text-sm leading-relaxed">
-                    Professional experience at Aquila Cyber, Myinstashop, and Tverza —
-                    building responsive UIs with React, Next.js, and TypeScript.
-                    Skilled in translating designs to code, API integration, and QA testing.
+                    Engineering scalable full-stack applications with Next.js,
+                    React, Node.js, and Express.js. Experienced with PostgreSQL
+                    and MySQL databases, secure JWT authentication, REST API
+                    design, and Playwright automated testing across real-world
+                    digital products.
                   </p>
                 </div>
               </motion.div>
@@ -811,12 +959,34 @@ export default function Home() {
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
+                      {proj.category && (
+                        <span className="text-xs font-semibold uppercase tracking-wider text-purple-400 mb-1 inline-block">
+                          {proj.category}
+                        </span>
+                      )}
                       <h3 className="text-lg font-semibold text-white mb-2">
                         {proj.title}
                       </h3>
-                      <p className="text-[#888] text-sm leading-relaxed mb-4 line-clamp-2">
+                      <p className="text-[#888] text-sm leading-relaxed mb-4">
                         {proj.description}
                       </p>
+
+                      {/* Key features highlight if present */}
+                      {proj.features && proj.features.length > 0 && (
+                        <div className="mb-4 bg-[#141414] border border-[#222] rounded-lg p-3">
+                          <p className="text-[11px] font-semibold text-[#888] uppercase tracking-wider mb-2">
+                            Key Highlights
+                          </p>
+                          <ul className="grid sm:grid-cols-2 gap-1.5 text-xs text-[#aaa]">
+                            {proj.features.map((feature, idx) => (
+                              <li key={idx} className="flex items-start gap-1.5">
+                                <span className="text-purple-400/80 font-bold">•</span>
+                                <span>{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
 
                       {/* Tech tags */}
                       <div className="flex flex-wrap gap-2 mb-4">
@@ -1147,6 +1317,9 @@ export default function Home() {
                     "Next.js",
                     "React",
                     "TypeScript",
+                    "Node.js",
+                    "Express.js",
+                    "PostgreSQL",
                     "Tailwind CSS",
                     "Framer Motion",
                   ].map((tech) => (
@@ -1190,7 +1363,7 @@ export default function Home() {
             {/* Copyright */}
             <div className="pt-8 border-t border-[#1a1a1a] text-center">
               <p className="text-[#444] text-sm">
-                © {new Date().getFullYear()} Ojehonmon Israel. Built with ❤️
+                © {new Date().getFullYear()} Ojehonmon Israel — Full-Stack Developer. Built with ❤️
                 using Next.js and TypeScript.
               </p>
             </div>

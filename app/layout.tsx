@@ -9,9 +9,9 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Ojehonmon Israel — Frontend Developer",
+  title: "Ojehonmon Israel — Full-Stack Developer",
   description:
-    "I craft stunning, responsive web applications with modern technologies. Passionate about creating exceptional digital experiences.",
+    "Full-Stack Developer specializing in building modern, responsive, and scalable web applications from frontend to backend with React, Next.js, TypeScript, Node.js, Express, and PostgreSQL/MySQL.",
   icons: {
     icon: "/favicon.svg",
   },
