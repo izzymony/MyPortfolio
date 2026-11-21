@@ -51,7 +51,7 @@ export default function Home() {
       category: "Full-Stack Web Application",
       description:
         "LensConnect is a photography marketplace built to connect clients with photographers. The platform allows photographers to showcase their portfolios while helping clients discover photographers based on their preferences. I developed the application with a focus on authentication, role-based access, API development, database integration, and responsive user experiences.",
-      image_url: "/lensconnect.png",
+      image_url: "/lensconnect.jpg",
       tech_stack: [
         "Next.js",
         "React",
@@ -948,14 +948,16 @@ export default function Home() {
                   <div className="flex flex-col md:flex-row md:items-start gap-6">
                     {/* Project image */}
                     {proj.image_url && (
-                      <div className="w-full md:w-64 lg:w-72 h-48 md:h-56 lg:h-60 rounded-xl overflow-hidden bg-[#1a1a1a] flex-shrink-0 relative border border-white/5">
-                        <Image
-                          src={proj.image_url}
-                          alt={proj.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          className="object-cover object-top w-full h-full transition-transform duration-700 hover:scale-105"
-                        />
+                      <div className="w-full md:w-72 lg:w-80 flex-shrink-0 rounded-xl overflow-hidden bg-[#1a1a1a] relative border border-white/5 group">
+                        <div className="relative w-full" style={{ aspectRatio: "16/10" }}>
+                          <Image
+                            src={proj.image_url}
+                            alt={proj.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 320px"
+                            className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                          />
+                        </div>
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
